@@ -8,7 +8,7 @@ import Modal from './Modal';
 import './App.module.css';
 
 export default function App() {
-    const [articles, setArticles] = useState([]);
+    const [items, setItems] = useState([]);
     let [error, setError] = useState(null);
     let [loader, setLoader] = useState(false);
 
@@ -16,28 +16,24 @@ export default function App() {
         setLoader(true);
         axios
             .get(
-                'https://pixabay.com/api/?q=cat&page=1&key=28517920-47e926602853ad98d512bf5fa&image_type=photo&orientation=horizontal&per_page=12',
+                'https://pixabay.com/api/?q=car&page=1&key=28517920-47e926602853ad98d512bf5fa&image_type=photo&orientation=horizontal&per_page=12',
             )
-            .then(({ data }) => setArticles(data.hits))
+            .then(({ data }) => setItems(data.hits))
             .catch(error => {
                 return setError(error);
             })
             .finally(() => setLoader(false));
     }, []);
 
+    let onHandleSubmit = inputValue => {
+        console.log(inputValue);
+    };
+
     return (
         <>
-            <Searchbar />
-            <ul>
-                {articles.map(({ id, previewURL }) => (
-                    <li key={id}>
-                        <img src={previewURL} />
-                    </li>
-                ))}
-            </ul>
-
-            <ImageGallery />
+            <Searchbar onHandleSubmit={onHandleSubmit} />
             <Loader />
+            <ImageGallery items={items} />
             <Button />
             <Modal />
         </>

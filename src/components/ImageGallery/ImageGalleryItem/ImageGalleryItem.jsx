@@ -1,8 +1,13 @@
 import React from 'react'
 
 
-export default function ImageGalleryItem() {
+export default function ImageGalleryItem({ id, previewURL , largeImageURL , tags}) {
   return (
-    <div>ImageGalleryItem</div>
+    
+
+     <li className="ImageGalleryItem">
+       <img src={largeImageURL} alt={tags} id = {id} className="ImageGalleryItem-image" />
+     </li>
+
   )
 }
