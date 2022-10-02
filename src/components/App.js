@@ -22,7 +22,6 @@ export default function App() {
 
     let fetchImages = () => {
         setLoader(true);
-
         fetchImagesWithQuery(searchQuery, page)
             .then(items => setItems(items))
             .catch(error => {
@@ -41,10 +40,11 @@ export default function App() {
     return (
         <>
             <Searchbar onHandleSubmit={onHandleSubmit} />
-            <Loader />
-            <ImageGallery items={items} />
-            <Button />
-            <Modal />
+
+            {loader && <Loader />}
+            {loader || <ImageGallery items={items} />}
+            {loader || <Button />}
+            {loader || <Modal />}
         </>
     );
 }
