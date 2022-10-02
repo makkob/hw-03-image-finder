@@ -17,18 +17,8 @@ export default function App() {
 
     useEffect(() => {
         fetchImages();
-
-        // setLoader(true);
-        // axios
-        //     .get(
-        //         'https://pixabay.com/api/?q=car&page=1&key=28517920-47e926602853ad98d512bf5fa&image_type=photo&orientation=horizontal&per_page=12',
-        //     )
-        //     .then(({ data }) => setItems(data.hits))
-        //     .catch(error => {
-        //         return setError(error);
-        //     })
-        //     .finally(() => setLoader(false));
-    }, []);
+        console.log('searchQuery ue =', searchQuery);
+    }, [searchQuery]);
 
     let fetchImages = () => {
         setLoader(true);
@@ -43,9 +33,9 @@ export default function App() {
 
     let onHandleSubmit = inputValue => {
         setSearchQuery(inputValue);
-        fetchImages();
-        console.log('inputValue=', inputValue);
-        console.log('searchQuery =', searchQuery);
+        // fetchImages();
+        // console.log('inputValue=', inputValue);
+        // console.log('searchQuery =', searchQuery);
     };
 
     return (
