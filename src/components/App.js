@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader';
@@ -9,21 +9,31 @@ import fetchImagesWithQuery from '../services/services';
 import './App.module.css';
 
 export default function App() {
-    const [items, setItems] = useState([]);
+    const [images, setImages] = useState([]);
     let [error, setError] = useState(null);
     let [loader, setLoader] = useState(false);
-    let [searchQuery, setSearchQuery] = useState('');
+    let [searchQuery, setSearchQuery] = useState('popular');
     let [page, setPage] = useState(1);
+    let [perPage, setPerPage] = useState(12);
 
     useEffect(() => {
         fetchImages();
         console.log('searchQuery ue =', searchQuery);
+        console.log(page);
+        console.log(perPage);
     }, [searchQuery]);
+
+    let onLoadMore = () => {
+        setPage((page += 1));
+
+        fetchImages();
+    };
 
     let fetchImages = () => {
         setLoader(true);
-        fetchImagesWithQuery(searchQuery, page)
-            .then(items => setItems(items))
+        fetchImagesWithQuery(searchQuery, page, perPage)
+            .then(items => setImages([...images, ...items]))
+
             .catch(error => {
                 return setError(error);
             })
@@ -32,9 +42,8 @@ export default function App() {
 
     let onHandleSubmit = inputValue => {
         setSearchQuery(inputValue);
-        // fetchImages();
-        // console.log('inputValue=', inputValue);
-        // console.log('searchQuery =', searchQuery);
+        setPage(1);
+        setImages([]);
     };
 
     return (
@@ -42,8 +51,8 @@ export default function App() {
             <Searchbar onHandleSubmit={onHandleSubmit} />
 
             {loader && <Loader />}
-            {loader || <ImageGallery items={items} />}
-            {loader || <Button />}
+            {loader || <ImageGallery images={images} />}
+            {loader || <Button handleClick={onLoadMore} />}
             {loader || <Modal />}
         </>
     );

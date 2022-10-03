@@ -1,11 +1,8 @@
 import React from 'react'
 
-export default function Button() {
+export default function Button({handleClick}) {
 
-  window.scrollTo({
-    top: document.documentElement.scrollHeight,
-    behavior: 'smooth',
-  })
+
 
   return (
     
@@ -14,7 +11,7 @@ export default function Button() {
    
 
    <div>
-     <button className="Button" type ="button"> Load more </button>
+     <button onClick={handleClick} className="Button" type ="button"> Load more </button>
    </div> 
     
 
