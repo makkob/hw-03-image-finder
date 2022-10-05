@@ -1,7 +1,6 @@
 import axios from 'axios';
-require('dotenv').config();
-// console.log(process.env);
-
+// import { API_KEY } from '../Token/token.json';
+// console.log(API_KEY);
 const API_KEY = '28517920-47e926602853ad98d512bf5fa';
 
 function fetchImagesWithQuery(query, page, perPage) {

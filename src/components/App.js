@@ -24,12 +24,23 @@ export default function App() {
         setPage((page += 1));
 
         fetchImages();
+
+        setTimeout(() => {
+            scroll();
+        }, 50);
+    };
+
+    let scroll = () => {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+        });
     };
 
     let fetchImages = () => {
         setLoader(true);
         fetchImagesWithQuery(searchQuery, page, perPage)
-            .then(items => setImages([...images, ...items]))
+            .then(items => setImages([...images, ...items]), scroll())
 
             .catch(error => {
                 return setError(error);
