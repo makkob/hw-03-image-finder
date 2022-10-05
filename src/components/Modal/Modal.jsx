@@ -1,7 +1,13 @@
 import React from 'react'
 
-export default function Modal() {
+export default function Modal({largeImageURL , tags}) {
   return (
-    <div>Modal</div>
+    // <div className="Overlay">
+    //  <div className="Modal">
+    //   <img src={largeImageURL} alt={tags} />
+    //  </div>
+    // </div>
+
+ <div>modal</div>
   )
 }

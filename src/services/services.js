@@ -1,4 +1,6 @@
 import axios from 'axios';
+require('dotenv').config();
+// console.log(process.env);
 
 const API_KEY = '28517920-47e926602853ad98d512bf5fa';
 

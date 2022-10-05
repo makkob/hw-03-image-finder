@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
@@ -18,9 +18,6 @@ export default function App() {
 
     useEffect(() => {
         fetchImages();
-        console.log('searchQuery ue =', searchQuery);
-        console.log(page);
-        console.log(perPage);
     }, [searchQuery]);
 
     let onLoadMore = () => {

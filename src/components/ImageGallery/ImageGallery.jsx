@@ -20,6 +20,8 @@ export default function ImageGallery({images}) {
 
      </ul>
 
+     
+
     </>
   )
 }
