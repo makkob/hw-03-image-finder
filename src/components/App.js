@@ -21,6 +21,10 @@ export default function App() {
 
     useEffect(() => {
         fetchImages();
+        const items = localStorage.getItem('perPage');
+        if (items) {
+            setPerPage(JSON.parse(items));
+        }
     }, [searchQuery]);
 
     let onLoadMore = () => {
@@ -65,9 +69,22 @@ export default function App() {
         setModalImgUrl(modalImgURL);
         detModalImgTag(modalTag);
     };
+
+    let changePerPage = evt => {
+        if (perPage !== evt.target.value) {
+            setPerPage(evt.target.value);
+            localStorage.setItem('perPage', JSON.stringify(perPage));
+        }
+        console.log('evt.target.value', evt.target.value);
+        console.log('perPage', perPage);
+    };
     return (
         <>
-            <Searchbar onHandleSubmit={onHandleSubmit} />
+            <Searchbar
+                onHandleSubmit={onHandleSubmit}
+                changePerPageValue={changePerPage}
+                perPageValue={perPage}
+            />
 
             {loader && <Loader />}
             {loader || <ImageGallery images={images} onShowModal={showModal} />}

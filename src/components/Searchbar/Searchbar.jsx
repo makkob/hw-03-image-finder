@@ -1,10 +1,11 @@
 
 import React , {useState} from 'react'
 
-export default function Searchbar({onHandleSubmit}) {
+export default function Searchbar({onHandleSubmit , perPageValue , changePerPageValue}) {
 
   let [inputValue, setInputValue] = useState("");
-
+ 
+  
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onHandleSubmit(inputValue);
@@ -16,6 +17,8 @@ export default function Searchbar({onHandleSubmit}) {
     setInputValue(evt.target.value);
    
   }
+  
+
 
   return (
 
@@ -38,6 +41,8 @@ export default function Searchbar({onHandleSubmit}) {
       onChange = {handleChange}
     />
   </form>
+  <p>      Images per page   </p>
+    <input  type="number" min="3" max="48" value = {perPageValue  } onChangeCapture = {changePerPageValue} />
 </header>
   )
 }
