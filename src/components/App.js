@@ -15,9 +15,9 @@ export default function App() {
     let [searchQuery, setSearchQuery] = useState('popular');
     let [page, setPage] = useState(1);
     let [perPage, setPerPage] = useState(12);
-    let [modalImgURL, modalImgUrl] = useState('');
-    let [modalTag, modalImgTag] = useState('');
-    let [modalState, setModalState] = useState(true);
+    let [modalImgURL, setModalImgUrl] = useState('');
+    let [modalTag, detModalImgTag] = useState('');
+    let [modalState, setModalState] = useState(false);
 
     useEffect(() => {
         fetchImages();
@@ -60,13 +60,17 @@ export default function App() {
     let handleModal = () => {
         setModalState(false);
     };
-
+    let showModal = (modalImgURL, modalTag) => {
+        setModalState(true);
+        setModalImgUrl(modalImgURL);
+        detModalImgTag(modalTag);
+    };
     return (
         <>
             <Searchbar onHandleSubmit={onHandleSubmit} />
 
-            {<Loader />}
-            {loader || <ImageGallery images={images} />}
+            {loader && <Loader />}
+            {loader || <ImageGallery images={images} onShowModal={showModal} />}
             {modalState && (
                 <Modal
                     largeImageURL={modalImgURL}

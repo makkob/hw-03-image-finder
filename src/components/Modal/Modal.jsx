@@ -29,6 +29,6 @@ export default function Modal({largeImageURL , tags , onHandleModal}) {
      </div>
     </div>
 
-//  <div>modal</div>
+
   )
 }
