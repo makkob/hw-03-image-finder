@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
@@ -15,6 +15,9 @@ export default function App() {
     let [searchQuery, setSearchQuery] = useState('popular');
     let [page, setPage] = useState(1);
     let [perPage, setPerPage] = useState(12);
+    let [modalImgURL, modalImgUrl] = useState('');
+    let [modalTag, modalImgTag] = useState('');
+    let [modalState, setModalState] = useState(true);
 
     useEffect(() => {
         fetchImages();
@@ -27,10 +30,11 @@ export default function App() {
 
         setTimeout(() => {
             scroll();
-        }, 50);
+        }, 100);
     };
 
     let scroll = () => {
+        setLoader(false);
         window.scrollTo({
             top: document.documentElement.scrollHeight,
             behavior: 'smooth',
@@ -40,12 +44,12 @@ export default function App() {
     let fetchImages = () => {
         setLoader(true);
         fetchImagesWithQuery(searchQuery, page, perPage)
-            .then(items => setImages([...images, ...items]), scroll())
+            .then(items => setImages([...images, ...items]))
 
             .catch(error => {
                 return setError(error);
             })
-            .finally(() => setLoader(false));
+            .finally(() => scroll());
     };
 
     let onHandleSubmit = inputValue => {
@@ -53,15 +57,24 @@ export default function App() {
         setPage(1);
         setImages([]);
     };
+    let handleModal = () => {
+        setModalState(false);
+    };
 
     return (
         <>
             <Searchbar onHandleSubmit={onHandleSubmit} />
 
-            {loader && <Loader />}
+            {<Loader />}
             {loader || <ImageGallery images={images} />}
-            {loader || <Button handleClick={onLoadMore} />}
-            {loader || <Modal />}
+            {modalState && (
+                <Modal
+                    largeImageURL={modalImgURL}
+                    tags={modalTag}
+                    onHandleModal={handleModal}
+                />
+            )}
+            {<Button handleClick={onLoadMore} />}
         </>
     );
 }
