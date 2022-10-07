@@ -42,7 +42,7 @@ export default function Searchbar({onHandleSubmit , perPageValue , changePerPage
     />
   </form>
   <p>      Images per page   </p>
-    <input  type="number" min="3" max="48" value = {perPageValue  } onChangeCapture = {changePerPageValue} />
+    <input  type="number" min="3" max="48" value = {perPageValue  } onChange = {changePerPageValue} />
 </header>
   )
 }

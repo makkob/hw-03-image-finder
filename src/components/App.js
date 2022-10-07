@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { alert } from '@pnotify/core';
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
@@ -12,7 +15,7 @@ export default function App() {
     const [images, setImages] = useState([]);
     let [error, setError] = useState(null);
     let [loader, setLoader] = useState(false);
-    let [searchQuery, setSearchQuery] = useState('popular');
+    let [searchQuery, setSearchQuery] = useState('');
     let [page, setPage] = useState(1);
     let [perPage, setPerPage] = useState(12);
     let [modalImgURL, setModalImgUrl] = useState('');
@@ -21,6 +24,7 @@ export default function App() {
 
     useEffect(() => {
         fetchImages();
+
         const items = localStorage.getItem('perPage');
         if (items) {
             setPerPage(JSON.parse(items));
@@ -44,6 +48,17 @@ export default function App() {
             behavior: 'smooth',
         });
     };
+    let showError = error => {
+        alert({
+            title: 'Error',
+            text: `There's some error: ${error.message}`,
+            type: 'notice',
+            delay: 1500,
+        });
+
+        console.error(error);
+        setError('');
+    };
 
     let fetchImages = () => {
         setLoader(true);
@@ -51,7 +66,8 @@ export default function App() {
             .then(items => setImages([...images, ...items]))
 
             .catch(error => {
-                return setError(error);
+                setError(error.message);
+                showError(error);
             })
             .finally(() => scroll());
     };
@@ -73,9 +89,11 @@ export default function App() {
     let changePerPage = evt => {
         if (perPage !== evt.target.value) {
             setPerPage(evt.target.value);
+
             localStorage.setItem('perPage', JSON.stringify(perPage));
         }
         console.log('evt.target.value', evt.target.value);
+
         console.log('perPage', perPage);
     };
     return (
@@ -95,7 +113,7 @@ export default function App() {
                     onHandleModal={handleModal}
                 />
             )}
-            {<Button handleClick={onLoadMore} />}
+            {loader || (images && <Button handleClick={onLoadMore} />)}
         </>
     );
 }

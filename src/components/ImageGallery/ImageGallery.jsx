@@ -9,9 +9,9 @@ export default function ImageGallery({images , onShowModal}) {
      
    <ul className="ImageGallery">
 
-     {images.map(({ id, previewURL , largeImageURL , tags  }) => (
-       <ImageGalleryItem key = {id} li = {id}
-                         previewURL = {previewURL}
+     {images.map(({ id,  largeImageURL , tags  }) => (
+       <ImageGalleryItem key = {id} 
+                         
                          largeImageURL = {largeImageURL}
                          tags = {tags}
                          onImgClick = { () => onShowModal(largeImageURL , tags) }
