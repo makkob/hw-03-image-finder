@@ -25,7 +25,7 @@ export default function App() {
     useEffect(() => {
         fetchImages();
 
-        const items = localStorage.getItem('perPage');
+        let items = localStorage.getItem('perPage');
         if (items) {
             setPerPage(JSON.parse(items));
         }
@@ -90,7 +90,7 @@ export default function App() {
         if (perPage !== evt.target.value) {
             setPerPage(evt.target.value);
 
-            localStorage.setItem('perPage', JSON.stringify(perPage));
+            localStorage.setItem('perPage', JSON.stringify(evt.target.value));
         }
         console.log('evt.target.value', evt.target.value);
 
