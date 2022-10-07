@@ -48,10 +48,10 @@ export default function App() {
             behavior: 'smooth',
         });
     };
-    let showError = error => {
+    let showError = () => {
         alert({
             title: 'Error',
-            text: `There's some error: ${error.message}`,
+            text: `There's some error: ${error}`,
             type: 'notice',
             delay: 1500,
         });
