@@ -1,5 +1,7 @@
 
 import React , {useState} from 'react'
+import styles from "./Searchbar.module.css";
+
 
 export default function Searchbar({onHandleSubmit , perPageValue , changePerPageValue}) {
 
@@ -23,7 +25,7 @@ export default function Searchbar({onHandleSubmit , perPageValue , changePerPage
   return (
 
 
-    <header className="Searchbar">
+    <header className={styles.Searchbar}>
   <form className="SearchForm"
    onSubmit={handleSubmit}
    >
