@@ -26,15 +26,15 @@ export default function Searchbar({onHandleSubmit , perPageValue , changePerPage
 
 
     <header className={styles.Searchbar}>
-  <form className="SearchForm"
+  <form className={styles.SearchForm}
    onSubmit={handleSubmit}
    >
-    <button type="submit" className="SearchForm-button">
-      <span className="SearchForm-button-label">Search</span>
+    <button type="submit" className={styles.SearchForm_button}>
+      <span className={styles.SearchForm_button_label}>Search</span>
     </button>
 
     <input 
-      className="SearchForm-input"
+      className={styles.SearchForm_input}
       type="text"
       autoComplete="off"
       autoFocus
@@ -43,8 +43,8 @@ export default function Searchbar({onHandleSubmit , perPageValue , changePerPage
       onChange = {handleChange}
     />
   </form>
-  <p>      Images per page   </p>
-    <input  type="number" min="3" max="48" value = {perPageValue  } onChange = {changePerPageValue} />
+  <p   className={styles.p} >  Images per page   </p>
+    <input  className={styles.PerPageForm} type="number" min="3" max="48" value = {perPageValue  } onChange = {changePerPageValue} />
 </header>
   )
 }
