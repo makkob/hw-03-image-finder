@@ -1,5 +1,7 @@
 import React from 'react'
+import styles from "./ImageGallery.module.css";
 import ImageGalleryItem from './ImageGalleryItem'
+
 
 export default function ImageGallery({images , onShowModal}) { 
   
@@ -7,7 +9,7 @@ export default function ImageGallery({images , onShowModal}) {
  <>
      
      
-   <ul className="ImageGallery">
+   <ul className={styles.ImageGallery}>
 
      {images.map(({ id,  largeImageURL , tags  }) => (
        <ImageGalleryItem key = {id} 
