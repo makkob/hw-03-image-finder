@@ -92,16 +92,13 @@ export default function App() {
 
             localStorage.setItem('perPage', JSON.stringify(evt.target.value));
         }
-        console.log('evt.target.value', evt.target.value);
-
-        console.log('perPage', perPage);
     };
     return (
         <>
             <Searchbar
                 onHandleSubmit={onHandleSubmit}
                 changePerPageValue={changePerPage}
-                perPageValue={perPage}
+                perPageValue={Number(perPage)}
             />
 
             {loader && <Loader />}

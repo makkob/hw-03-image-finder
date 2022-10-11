@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "./ImageGallery.module.css";
+import PropTypes from "prop-types";
 import ImageGalleryItem from './ImageGalleryItem'
 
 
@@ -14,10 +15,10 @@ export default function ImageGallery({images , onShowModal}) {
      {images.map(({ id,  largeImageURL , tags  }) => (
        <ImageGalleryItem key = {id} 
                          
-                         largeImageURL = {largeImageURL}
-                         tags = {tags}
-                         onImgClick = { () => onShowModal(largeImageURL , tags) }
-         />
+       largeImageURL = {largeImageURL}
+       tags = {tags}
+       onImgClick = { () => onShowModal(largeImageURL , tags) }
+       />
      
        ))}
 
@@ -28,3 +29,8 @@ export default function ImageGallery({images , onShowModal}) {
     </>
   )
 }
+
+ImageGallery.propTypes = {
+  images: PropTypes.array.isRequired,
+  onShowModal: PropTypes.func.isRequired,
+};

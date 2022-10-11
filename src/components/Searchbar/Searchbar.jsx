@@ -1,9 +1,13 @@
 
 import React , {useState} from 'react'
 import styles from "./Searchbar.module.css";
+import PropTypes from "prop-types";
 
 
 export default function Searchbar({onHandleSubmit , perPageValue , changePerPageValue}) {
+
+
+
 
   let [inputValue, setInputValue] = useState("");
  
@@ -48,3 +52,9 @@ export default function Searchbar({onHandleSubmit , perPageValue , changePerPage
 </header>
   )
 }
+
+Searchbar.propTypes = {
+  onHandleSubmit: PropTypes.func.isRequired,
+  perPageValue: PropTypes.number.isRequired,
+  changePerPageValue: PropTypes.func.isRequired,
+};

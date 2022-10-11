@@ -1,5 +1,6 @@
 import React , { useEffect } from 'react'
 import styles from "./Modal.module.css";
+import PropTypes from "prop-types";
 
 
 export default function Modal({largeImageURL , tags , onHandleModal}) {
@@ -33,3 +34,9 @@ export default function Modal({largeImageURL , tags , onHandleModal}) {
 
   )
 }
+
+Modal.propTypes = {
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  onHandleModal: PropTypes.func.isRequired,
+};
